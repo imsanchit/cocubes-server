@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Base {
-    constructor(id, created, updated, deleted) {
-        this.id = id;
-        this.created = created;
-        this.updated = updated;
-        this.deleted = deleted;
+    constructor() {
+        this.id = 1;
+        this.created = new Date().getTime();
+        this.updated = 1;
+        this.deleted = 1;
     }
 }
-exports.Base = Base;
+exports.default = Base;
 //# sourceMappingURL=Base.js.map

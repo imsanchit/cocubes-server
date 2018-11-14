@@ -1,13 +1,13 @@
-export class Base {
-    id: BigInteger
-    created: BigInteger
-    updated: BigInteger
-    deleted: BigInteger
+export default class Base {
+    id: number
+    created: number
+    updated: number
+    deleted: number
 
-    constructor(id: BigInteger, created: BigInteger, updated: BigInteger, deleted: BigInteger) {
-        this.id = id;
-        this.created = created;
-        this.updated = updated
-        this.deleted = deleted
+    constructor() {
+        this.id = 1;
+        this.created = new Date().getTime();
+        this.updated = 1;
+        this.deleted = 1;
     }
 }
