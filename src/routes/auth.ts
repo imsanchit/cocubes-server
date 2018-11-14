@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../config/database')
-const Students = require('../models/students')
+import {Request, Response, Router} from 'express';
+import { MysqlError, FieldInfo } from 'mysql';
+import dbConnection from "../config/database"
+import Students from "../models/Students";
 
-router.route('/signup')
-    .get((req: any, res: any) => {
+var auth = Router();
+
+auth.route('/signup')
+    .get((req: Request, res: Response) => {
         (async function fetchUsers(){
-            db.query('SELECT * from students', function (error: any, results: any, fields: any) {
+            dbConnection.query('SELECT * from students', function (error: MysqlError | null, results?: any, fields?: FieldInfo[]) {
                 if (error) throw error;
                 console.log(results)
                 res.send(results)
@@ -14,18 +16,16 @@ router.route('/signup')
         }())
         // res.json(req.body);
     })
-    .post((req: any, res: any) => {
-        const s = new Students('sanchit', 'sanchitmittal1@gmail.com');
-        const phone_number = "9717165634";
-        const user_type_id = "1";
+    .post((req: Request, res: Response) => {
+        const student = new Students("sanchit", "sanchitmittal1@gmail.com", "password", 1, 1, "1234", "male", new Date(), "line-1", "line-2", "city", "state", "country", 1, "class");        
         (async function insertUser(){
-            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${s.name}", "${s.email}", "${phone_number}", ${user_type_id})`;
+            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${student.name}", "${student.email}", "${student.phoneNumber}", ${student.userTypeId})`;
             console.log(`query is ${query}`);
-            db.query(`${query}`, function(error: any, results: any, fields: any) {
+            dbConnection.query(`${query}`, function(error: MysqlError | null, results?: any, fields?: FieldInfo[]) {
                 if (error) throw error;
                 console.log(results)
                 res.json(results)
             })
         }())        
     })
-module.exports = router;
+export default auth;
