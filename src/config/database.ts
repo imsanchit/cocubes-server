@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     database : 'cocubes'
   });
 
-connection.connect(function(err){
+connection.connect(function(err: Error){
     if(!err) {
         console.log("Database is connected ... ");    
     } else {

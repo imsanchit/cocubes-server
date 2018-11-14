@@ -1,4 +1,4 @@
-var createError = require('http-errors');
+import { CreateHttpError } from "http-errors";
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -19,12 +19,13 @@ app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+app.use(function(req: any, res: any, next: any) {
+  // next(createHttpError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err: any, req: any, res: any, next: any) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   console.log(`error message should be ${err.message}`)
@@ -35,4 +36,7 @@ app.use(function(err, req, res, next) {
   res.send(err)
 });
 
-module.exports = app;
+// export app
+// module.exports = app;
+export default app;
+// module.exports = app;
