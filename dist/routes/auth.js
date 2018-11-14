@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const database_1 = __importDefault(require("../config/database"));
-const Students_1 = __importDefault(require("../models/Students"));
 var auth = express_1.Router();
 auth.route('/signup')
     .get((req, res) => {
@@ -30,14 +29,20 @@ auth.route('/signup')
     // res.json(req.body);
 })
     .post((req, res) => {
-    const student = new Students_1.default("sanchit", "sanchitmittal1@gmail.com", "password", 1, 1, "1234", "male", new Date(), "line-1", "line-2", "city", "state", "country", 1, "class");
+    const { username, email, phoneNumber } = req.body;
+    // const student = new Students("sanchit", "sanchitmittal1@gmail.com", "password", 1, 1, "1234", "male", new Date(), "line-1", "line-2", "city", "state", "country", 1, "class");        
     (function insertUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${student.name}", "${student.email}", "${student.phoneNumber}", ${student.userTypeId})`;
-            console.log(`query is ${query}`);
+            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${username}", "${email}", "${phoneNumber}", 1)`;
+            // console.log(`query is ${query}`);
             database_1.default.query(`${query}`, function (error, results, fields) {
-                if (error)
-                    throw error;
+                if (error && error.code == "ER_DUP_ENTRY") {
+                    const errorResp = {
+                        "code": error.code,
+                        "message": error.message
+                    };
+                    res.json(errorResp);
+                }
                 console.log(results);
                 res.json(results);
             });
