@@ -1,22 +1,25 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
-var usersRouter = require('./routes/users');
-var app = express();
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const http_errors_1 = __importDefault(require("http-errors"));
+const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
+const index_1 = __importDefault(require("./routes/index"));
+const auth_1 = __importDefault(require("./routes/auth"));
+const users_1 = __importDefault(require("./routes/users"));
+var app = express_1.default();
+app.use(morgan_1.default('dev'));
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/', index_1.default);
+app.use('/auth', auth_1.default);
+app.use('/users', users_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    // next(createHttpError(404));
+    next(http_errors_1.default(404));
 });
 // error handler
 app.use(function (err, req, res, next) {
@@ -28,8 +31,5 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.send(err);
 });
-// export app
-// module.exports = app;
 exports.default = app;
-// module.exports = app;
 //# sourceMappingURL=app.js.map

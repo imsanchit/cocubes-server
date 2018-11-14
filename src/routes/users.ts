@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+import { Request, Response, Router } from "express";
+import { NextFunction } from "connect";
+var users = Router();
 
 /* GET users listing. */
-router.get('/', function(req: any, res: any, next: any) {
+users.get('/', function(req: Request, res: Response, next: NextFunction) {
   res.send('respond with a resource');
 });
 
-module.exports = router;
+export default users;

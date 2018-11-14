@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+
+import {Request, Response, Router} from "express";
+import { NextFunction } from "connect";
+
+var index = Router()
 
 /* GET home page. */
-router.get('/', function(req: any, res: any, next: any) {
+index.get('/', function(req: Request, res: Response, next: NextFunction) {
   res.send("Sign in")
 });
 
-module.exports = router;
+export default index;

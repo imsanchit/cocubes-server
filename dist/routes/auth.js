@@ -7,15 +7,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var express = require('express');
-var router = express.Router();
-var db = require('../config/database');
-const Students = require('../models/students');
-router.route('/signup')
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const database_1 = __importDefault(require("../config/database"));
+const Students_1 = __importDefault(require("../models/Students"));
+var auth = express_1.Router();
+auth.route('/signup')
     .get((req, res) => {
     (function fetchUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            db.query('SELECT * from students', function (error, results, fields) {
+            database_1.default.query('SELECT * from students', function (error, results, fields) {
                 if (error)
                     throw error;
                 console.log(results);
@@ -26,14 +30,12 @@ router.route('/signup')
     // res.json(req.body);
 })
     .post((req, res) => {
-    const s = new Students('sanchit', 'sanchitmittal1@gmail.com');
-    const phone_number = "9717165634";
-    const user_type_id = "1";
+    const student = new Students_1.default("sanchit", "sanchitmittal1@gmail.com", "password", 1, 1, "1234", "male", new Date(), "line-1", "line-2", "city", "state", "country", 1, "class");
     (function insertUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${s.name}", "${s.email}", "${phone_number}", ${user_type_id})`;
+            const query = `INSERT INTO \`students\`(\`Created\`, \`Name\`, \`Email\`, \`Phone_Number\`, \`User_TypeID\`) VALUES (${Date.now()}, "${student.name}", "${student.email}", "${phone_number}", ${user_type_id})`;
             console.log(`query is ${query}`);
-            db.query(`${query}`, function (error, results, fields) {
+            database_1.default.query(`${query}`, function (error, results, fields) {
                 if (error)
                     throw error;
                 console.log(results);
@@ -42,5 +44,5 @@ router.route('/signup')
         });
     }());
 });
-module.exports = router;
+exports.default = auth;
 //# sourceMappingURL=auth.js.map

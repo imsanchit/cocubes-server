@@ -1,18 +1,18 @@
-var mysql = require('mysql');
+import mysql from "mysql";
 
-var connection = mysql.createConnection({
+var dbConnection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'root',
     database : 'cocubes'
   });
 
-connection.connect(function(err: Error){
+  dbConnection.connect(function(err: Error){
     if(!err) {
         console.log("Database is connected ... ");    
     } else {
         console.log(`Error connecting database ... ${err}`);    
     }
 });
-
-module.exports = connection;
+export default dbConnection;
+// module.exports = connection;

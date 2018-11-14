@@ -1,9 +1,10 @@
 "use strict";
-var express = require('express');
-var router = express.Router();
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+var index = express_1.Router();
 /* GET home page. */
-router.get('/', function (req, res, next) {
+index.get('/', function (req, res, next) {
     res.send("Sign in");
 });
-module.exports = router;
+exports.default = index;
 //# sourceMappingURL=index.js.map

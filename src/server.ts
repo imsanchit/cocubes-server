@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 import app from "./app";
+import Debug from "debug";
+const debug = Debug("cocubes-server:server");
 
-var debug = require('debug')('cocubes-server:server');
-var http = require('http');
+import http from "http";
 
 /**
  * Get port from environment and store in Express.
@@ -33,7 +34,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val: any) {
+function normalizePort(val: string) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -54,7 +55,8 @@ function normalizePort(val: any) {
  */
 
 function onError(error: any) {
-  if (error.syscall !== 'listen') {
+  // if (error.syscall !== 'listen') {
+  if (error.name !== 'listen') {
     throw error;
   }
 
