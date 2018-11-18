@@ -10,10 +10,13 @@
     "body-parser": "^1.18.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "googleapis": "^27.0.0",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.4.0",
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
     "mysql-model": "0.0.3",
+    "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4"
   },
   "nodemonConfig": {
@@ -27,8 +30,10 @@
     "@types/debug": "0.0.31",
     "@types/express": "^4.16.0",
     "@types/http-errors": "^1.6.1",
+    "@types/jsonwebtoken": "^8.3.0",
     "@types/morgan": "^1.7.35",
     "@types/mysql": "^2.15.5",
+    "@types/nodemailer": "^4.6.5",
     "typescript": "^3.1.6"
   }
 }
