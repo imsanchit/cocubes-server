@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import { NextFunction } from "connect";
+// import { jwt } from "jsonwebtoken"
 var users = Router();
 
 /* GET users listing. */
