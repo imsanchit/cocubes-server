@@ -6,6 +6,7 @@ import logger from "morgan";
 
 import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
+import welcomeRouter from "./routes/welcome";
 import usersRouter from "./routes/users";
 import { NextFunction } from "connect";
 
@@ -18,7 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/welcome', welcomeRouter);
 app.use('/users', usersRouter);
+// http://localhost:3000/welcome?token=${token}
 
 // catch 404 and forward to error handler
 app.use(function(req: Request, res: Response, next: NextFunction) {

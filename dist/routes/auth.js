@@ -65,7 +65,7 @@ auth.route('/signup')
                                 refreshToken: '1/Wf3afmRUXsUk7zbRXNaUAln_m_9c7hn6uq4-VmTpOHZ_GjbUoK9sxj5hEipw2HG0'
                             }
                         });
-                        const url = `http://localhost:3007/welcome?token=${token}`;
+                        const url = `http://localhost:3000/welcome?token=${token}`;
                         var mailOptions = {
                             from: 'Sanchit Mittal <sanchit13103509cse@gmail.com>',
                             to: email,

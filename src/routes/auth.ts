@@ -64,7 +64,7 @@ auth.route('/signup')
                             }
                         })
                         
-                        const url = `http://localhost:3007/welcome?token=${token}`
+                        const url = `http://localhost:3000/welcome?token=${token}`
 
                         var mailOptions = {
                             from: 'Sanchit Mittal <sanchit13103509cse@gmail.com>',
